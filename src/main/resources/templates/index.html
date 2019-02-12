@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Moje statystyki:</p>
+<!--<h2 th:if="${player != null}" th:text="${player.getDataDtoList().}"></h2>-->
+
+<!--<table th:if="${player != null}" class="table table-hover" style="width: 300px">
+    <thead>
+    <tr>
+        <td th:if="${forecast != null}" th:text="Data"></td>
+        <td th:if="${forecast != null}" th:text="Temperatura"></td>
+        <td th:if="${forecast != null}" th:text="Ciśnienie"></td>
+        <td th:if="${forecast != null}" th:text="Zachmurzenie"></td>
+        <td th:if="${forecast != null}" th:text="Wiatr"></td>
+    </tr>-->
+  <table>
+    <tr th:each="playerItem : ${player.getDataDtoList()}">
+        <td th:text="${playerItem.getNickname()}"></td>
+   <!--    <td th:text="${playerItem.getMain().getTemp()}"></td>
+        <td th:text="${playerItem.getMain().getPressure()}"></td>
+        <td th:text="${playerItem.getClouds().getAll()}"></td>
+        <td th:text="${playerItem.getWind().getSpeed()}"></td>-->
+    </tr>
+</table>
+
+</body>
+</html>
