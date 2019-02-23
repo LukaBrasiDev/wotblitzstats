@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 public class StatisticDto {
 
-    @JsonProperty("data")
-    private List<PlayerDto> playerDtoList;
+    @JsonProperty("all")
+    private AllDto allDto;
 }

@@ -17,9 +17,8 @@ public class StatisticController {
     }
 
     @GetMapping("/")
-    public String index(Model model){
-        model.addAttribute("player", statisticService.getStatistic());
-
+    public String index(Model model) {
+        model.addAttribute("stats", statisticService.getStats());
         return "index";
     }
 }

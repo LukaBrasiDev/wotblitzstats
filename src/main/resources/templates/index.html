@@ -6,25 +6,23 @@
 </head>
 <body>
 
-<p>Moje statystyki:</p>
-<!--<h2 th:if="${player != null}" th:text="${player.getDataDtoList().}"></h2>-->
+<p>WoT Blitz Stats App</p>
 
-<!--<table th:if="${player != null}" class="table table-hover" style="width: 300px">
-    <thead>
+
+<table>
+    <tr >
+        <td th:text="'Nick: '+${stats.getDataDto().getAlcotronicDto().getNickname()}"></td></tr>
+<tr>
+        <td th:text="'Zwycięstwa: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWins()}"></td>
+
+    </tr>
     <tr>
-        <td th:if="${forecast != null}" th:text="Data"></td>
-        <td th:if="${forecast != null}" th:text="Temperatura"></td>
-        <td th:if="${forecast != null}" th:text="Ciśnienie"></td>
-        <td th:if="${forecast != null}" th:text="Zachmurzenie"></td>
-        <td th:if="${forecast != null}" th:text="Wiatr"></td>
-    </tr>-->
-  <table>
-    <tr th:each="playerItem : ${player.getDataDtoList()}">
-        <td th:text="${playerItem.getNickname()}"></td>
-   <!--    <td th:text="${playerItem.getMain().getTemp()}"></td>
-        <td th:text="${playerItem.getMain().getPressure()}"></td>
-        <td th:text="${playerItem.getClouds().getAll()}"></td>
-        <td th:text="${playerItem.getWind().getSpeed()}"></td>-->
+        <td th:text="'Porażki: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getLosses()}"></td>
+
+    </tr>
+    <tr>
+        <td th:text="'Winrate: '"></td>
+
     </tr>
 </table>
 

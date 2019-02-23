@@ -7,4 +7,6 @@ public class AllDto {
 
     private int wins;
     private int losses;
+
+
 }
