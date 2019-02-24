@@ -5,13 +5,14 @@ import lombok.Data;
 @Data
 public class AllDto {
 
-    private int wins;
-    private int losses;
+    private double wins;
+    private double losses;
+    private double battles;
     private double winrate;
 
     public double getWinrate() {
-        double total = wins + losses;
-        double result = wins * 100 / total;
+
+        double result = (wins  / battles)*100;
         result *= 1000;
         result = Math.round(result);
         result /=1000;

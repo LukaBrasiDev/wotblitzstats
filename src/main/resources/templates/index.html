@@ -3,33 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>WoT Blitz Stats</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .content {
+            max-width: 960px;
+            margin: auto;
+        }
+
+        td{
+            color: gold;
+        }
+        body{background-color: black}
+    </style>
 </head>
 <body>
 
-<p>WoT Blitz Stats App</p>
+
+<div class="content">
 
 
-<table>
-    <tr >
-        <td th:text="'Nick: '+${stats.getDataDto().getAlcotronicDto().getNickname()}"></td></tr>
-<tr>
-        <td th:text="'Zwycięstwa: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWins()}"></td>
+    <table class="table table-hover table-striped table-dark">
+        <tr>
+            <td colspan=2 style="text-align: center"><h4>WoT Blitz Stats App</h4></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Nick:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getNickname()}"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Zwycięstwa:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWins()}"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Porażki:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getLosses()}"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Winrate:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right">Ostatnia bitwa:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+        </tr>
+    </table>
 
-    </tr>
-    <tr>
-        <td th:text="'Porażki: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getLosses()}"></td>
 
-    </tr>
-    <tr>
-        <td th:text="'Winrate: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
-
-    </tr>
-    </tr>
-    <tr>
-        <td th:text="'Ostatnia bitwa: '+${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
-
-    </tr>
-</table>
-
+</div>
 </body>
 </html>
