@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WoT Blitz Stats</title>
 </head>
 <body>
 
@@ -21,7 +21,12 @@
 
     </tr>
     <tr>
-        <td th:text="'Winrate: '"></td>
+        <td th:text="'Winrate: '+${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+
+    </tr>
+    </tr>
+    <tr>
+        <td th:text="'Ostatnia bitwa: '+${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
 
     </tr>
 </table>
