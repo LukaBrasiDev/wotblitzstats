@@ -17,6 +17,8 @@ public class AlcotronicDto {
     private String nickname;
     @JsonProperty("last_battle_time")
     private long lastBattleTime;
+    @JsonProperty("account_id")
+    private int accountId;
 
 /*    public String getLastBattleDate() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

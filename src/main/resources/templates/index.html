@@ -29,24 +29,36 @@
             <td colspan=2 style="text-align: center"><h4>WoT Blitz Stats App</h4></td>
         </tr>
         <tr>
-            <td style="text-align: right">Nick:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getNickname()}"></td>
+
+            <td colspan=2 style="text-align: center" th:utext="'<b>'+${stats.getDataDto().getAlcotronicDto().getNickname()}+'</b>'"></td>
         </tr>
-        <tr>
+     <!--   <tr>
             <td style="text-align: right">Zwycięstwa:</td>
             <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWins()}"></td>
         </tr>
         <tr>
             <td style="text-align: right">Porażki:</td>
             <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getLosses()}"></td>
-        </tr>
+        </tr>-->
         <tr>
             <td style="text-align: right">Winrate:</td>
             <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
         </tr>
         <tr>
+            <td style="text-align: right">Bitwy:</td>
+            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
+        </tr>
+        <tr>
             <td style="text-align: right">Ostatnia bitwa:</td>
             <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+        </tr>
+        <tr>
+            <td style="text-align: right"> </td>
+            <td > </td>
+        </tr>
+        <tr>
+            <td colspan=2 style="text-align: center"><button type="button" class="btn btn-outline-warning">Warning</button></td>
+
         </tr>
     </table>
 

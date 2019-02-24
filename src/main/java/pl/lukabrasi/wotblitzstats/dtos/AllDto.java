@@ -7,7 +7,7 @@ public class AllDto {
 
     private double wins;
     private double losses;
-    private double battles;
+    private int battles;
     private double winrate;
 
     public double getWinrate() {
