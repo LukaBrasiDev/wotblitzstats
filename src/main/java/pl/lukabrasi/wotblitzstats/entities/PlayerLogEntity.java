@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "wotb_player")
-public class PlayerEntity {
+public class PlayerLogEntity {
 
     private @Id @GeneratedValue
     int id;
