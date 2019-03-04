@@ -12,10 +12,15 @@
             margin: auto;
         }
 
-        td{
+        td {
             color: gold;
         }
-        body{background-color: black}
+
+        body {
+            background-color: black;
+            color: gold;
+            text-align: center
+        }
     </style>
 </head>
 <body>
@@ -24,73 +29,84 @@
 <div class="content">
 
 
-    <table class="table table-hover table-striped table-dark">
-        <tr>
-            <td colspan=2 style="text-align: center"><h4>WoT Blitz Temp Stats</h4></td>
-        </tr>
-        <tr>
+    <h4>WoT Blitz Temp Stats</h4>
 
-            <td colspan=2 style="text-align: center" th:utext="'<b>'+${stats.getDataDto().getAlcotronicDto().getNickname()}+'</b>'"></td>
-        </tr>
-     <!--   <tr>
-            <td style="text-align: right">Zwycięstwa:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWins()}"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Porażki:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getLosses()}"></td>
-        </tr>-->
-        <tr>
-            <td style="text-align: right">Winrate:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Bitwy:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Ostatnia bitwa:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right"> </td>
-            <td > </td>
-        </tr>
-        <tr>
-            <td colspan=2 style="text-align: center">
-                <form th:action="@{/}" method="post">
-                <button type="submit" class="btn btn-outline-warning">START / RESET</button>
-                </form>
-            </td>
 
-       <!--     <form th:action="@{/}" method="post" class="form-signin">
-                <input name="cityName" class="form-control" type="text" placeholder="Podaj miasto">
-                <div class="checkbox mb-3">
-                </div>
-                <button type="submit" class="btn btn-lg btn-primary btn-block" value="Sprawdź">Sprawdź pogodę</button>
-            </form>-->
+    <!-- formularz wyszukiwania nicku-->
+    <form th:action="@{/}" method="post" class="form-inline">
+        <div class="form-group mx-sm-3 mb-2">
 
+            <input type="text" class="form-control" name="nickname" placeholder="nick">
+        </div>
+        <button type="submit" class="btn btn-outline-warning mb-2">Wyszukaj</button>
+    </form>
+    <!-- koniec formularza wyszukiwania nicku-->
+
+
+    <!-- wyświetlanie listy nicków z wyszukiwarki -->
+    <table th:if="${nick!=null}" class="table table-hover table-sm" style="font-size: 8pt">
+
+         <tr th:each="nicknames : ${nick.getPlayerDataDtoList()}">
+
+            <td  th:text="${nicknames.getNickname()}"></td>
 
 
         </tr>
-        <tr>
-            <td style="text-align: right"> </td>
-            <td > </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Temp winrate:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Temp bitwy:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Ostatnia bitwa:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
-        </tr>
-
     </table>
+
+    <!-- koniec wyświetlania listy nicków z wyszukiwarki -->
+
+
+    <!--    <table class="table table-hover table-striped table-dark">
+            <tr>
+
+                <td colspan=2 style="text-align: center" th:utext="'<b>'+${stats.getDataDto().getAlcotronicDto().getNickname()}+'</b>'"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Winrate:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Bitwy:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Ostatnia bitwa:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right"> </td>
+                <td > </td>
+            </tr>
+            <tr>
+                <td colspan=2 style="text-align: center">
+                    <form th:action="@{/}" method="post">
+                    <button type="submit" class="btn btn-outline-warning">START / RESET</button>
+                    </form>
+                </td>
+
+
+
+
+            </tr>
+            <tr>
+                <td style="text-align: right"> </td>
+                <td > </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Temp winrate:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Temp bitwy:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Ostatnia bitwa:</td>
+                <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+            </tr>
+
+        </table>-->
 
 
 </div>

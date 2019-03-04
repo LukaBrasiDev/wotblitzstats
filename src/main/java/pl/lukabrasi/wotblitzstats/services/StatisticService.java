@@ -1,13 +1,19 @@
 package pl.lukabrasi.wotblitzstats.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import pl.lukabrasi.wotblitzstats.dtos.AccountDto;
 import pl.lukabrasi.wotblitzstats.dtos.PersonalDto;
 import pl.lukabrasi.wotblitzstats.entities.PlayerLogEntity;
+import pl.lukabrasi.wotblitzstats.forms.PlayerLogForm;
 import pl.lukabrasi.wotblitzstats.mappers.DtoToEntityMapper;
 import pl.lukabrasi.wotblitzstats.repositories.PlayerLogRepository;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -21,30 +27,47 @@ public class StatisticService {
         this.playerLogRepository = playerLogRepository;
     }
 
-/*    public boolean saveWeatherLog(WeatherDto weatherDto) {
-        WeatherLogEntity weatherLogEntity = WeatherDtoToWeatherEntityMapper.convert(weatherDto);
-        weatherLogEntity.setUser(userSession.getUserEntity());
-        return weatherLogRepository.save(weatherLogEntity) != null;
 
-    }*/
-
-    public boolean savePlayerLog(PersonalDto personalDto) {
+    public boolean savePlayerLogEntity(PersonalDto personalDto) {
         PlayerLogEntity playerLogEntity = DtoToEntityMapper.convert(personalDto);
-       // playerLogEntity.setUser(userSession.getUserEntity());
+        // playerLogEntity.setUser(userSession.getUserEntity());
         return playerLogRepository.save(playerLogEntity) != null;
 
     }
 
 
+    String accountId = "502174053";
+    @Value("${api.wotblitzapplicationid.key}")
+    String applicationId;
+
+
+    public AccountDto getAccountId(String nickname) {
+        RestTemplate restTemplate = getRestTemplate();
+        String url = "https://api.wotblitz.eu/wotb/account/list/?application_id=" + applicationId + "&search=" + nickname;
+        AccountDto accountDto = restTemplate.getForObject(url, AccountDto.class);
+
+        return accountDto;
+    }
+
     public PersonalDto getStats() {
         RestTemplate restTemplate = getRestTemplate();
-        PersonalDto personalDto = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?application_id=93fa062a128b405d638d4649f2cca564&account_id=502174053", PersonalDto.class);
+        PersonalDto personalDto = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?application_id=" + applicationId + "&account_id=" + accountId, PersonalDto.class);
+
         return personalDto;
     }
+
+/*    public void updatePlayerLogEntity(int account, PlayerLogForm playerLogForm) {
+        Optional<PlayerLogEntity> optionalPlayerLogEntity = playerLogRepository.findByAccountExists(account);
+        optionalPlayerLogEntity.get().setBattlesCount(playerLogForm.getBattlesCount());
+        optionalPlayerLogEntity.get().setWinsCount(playerLogForm.getWinsCount());
+        optionalPlayerLogEntity.get().setResetTime(playerLogForm.getResetTime());
+        playerLogRepository.save(optionalPlayerLogEntity.get());
+    }//todo*/
 
 
     @Bean
     public RestTemplate getRestTemplate() {
+
         return new RestTemplate();
     }
 }
