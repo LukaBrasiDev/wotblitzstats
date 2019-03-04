@@ -8,5 +8,5 @@ public class PlayerDataDto {
 
     private String nickname;
     @JsonProperty("account_id")
-    private int accountId;
+    private String accountId;
 }

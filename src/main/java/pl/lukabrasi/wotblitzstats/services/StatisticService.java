@@ -36,7 +36,7 @@ public class StatisticService {
     }
 
 
-    String accountId = "502174053";
+
     @Value("${api.wotblitzapplicationid.key}")
     String applicationId;
 
@@ -49,7 +49,7 @@ public class StatisticService {
         return accountDto;
     }
 
-    public PersonalDto getStats() {
+    public PersonalDto getStats(String accountId) {
         RestTemplate restTemplate = getRestTemplate();
         PersonalDto personalDto = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?application_id=" + applicationId + "&account_id=" + accountId, PersonalDto.class);
 

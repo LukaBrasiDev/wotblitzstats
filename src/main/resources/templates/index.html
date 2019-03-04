@@ -46,18 +46,18 @@
     <!-- wyświetlanie listy nicków z wyszukiwarki -->
     <table th:if="${nick!=null}" class="table table-hover table-sm" style="font-size: 8pt">
 
-         <tr th:each="nicknames : ${nick.getPlayerDataDtoList()}">
+         <ul  th:if="${nick!=null}" th:each="nicknames : ${nick.getPlayerDataDtoList()}">
 
-            <td  th:text="${nicknames.getNickname()}"></td>
+             <li th:if="${nick!=null}">  <a th:href="@{/{nickname}(nickname=${nicknames.getNickname()})}" th:text="${nicknames.getNickname()}"></a></li>
 
 
-        </tr>
+        </ul>
     </table>
 
     <!-- koniec wyświetlania listy nicków z wyszukiwarki -->
 
 
-    <!--    <table class="table table-hover table-striped table-dark">
+       <table th:if="${stats!=null}" class="table table-hover table-striped table-dark">
             <tr>
 
                 <td colspan=2 style="text-align: center" th:utext="'<b>'+${stats.getDataDto().getAlcotronicDto().getNickname()}+'</b>'"></td>
@@ -106,7 +106,7 @@
                 <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
             </tr>
 
-        </table>-->
+        </table>
 
 
 </div>

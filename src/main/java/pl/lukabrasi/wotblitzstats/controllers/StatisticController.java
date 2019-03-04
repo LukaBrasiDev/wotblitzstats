@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.lukabrasi.wotblitzstats.dtos.PersonalDto;
 import pl.lukabrasi.wotblitzstats.entities.PlayerLogEntity;
 import pl.lukabrasi.wotblitzstats.services.StatisticService;
+
+import java.util.Optional;
 
 @Controller
 public class StatisticController {
@@ -35,16 +38,14 @@ public class StatisticController {
         return "index";
     }
 
-/*    @PostMapping("/")
-    public String index(@RequestParam("cityName") String cityName,
-                        Model model) {
-        if (!userSession.isLogin()) {
-            return "redirect:/login";
-        }
-        model.addAttribute("weather", weatherLogService.getCurrentWeather(cityName));
-        model.addAttribute("forecast", weatherLogService.getWeatherForecast(cityName));
+    @GetMapping("/{nickname}") //todo
+    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) {
+      String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
+        System.out.println(accountNb);
+            model.addAttribute("stats", statisticService.getStats(accountNb));
+
         return "index";
-    }*/
+    }
 
 
 }
