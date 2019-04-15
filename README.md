@@ -8,3 +8,7 @@ Application for player's stats calculation:
 TODO:
 - temporary stats after RESET button
 - player selection
+
+
+JSON/GSON
+https://stackoverflow.com/questions/41680906/java-how-to-handle-dynamic-json-category-name
