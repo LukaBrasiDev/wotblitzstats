@@ -11,6 +11,8 @@ import pl.lukabrasi.wotblitzstats.dtos.PersonalDto;
 import pl.lukabrasi.wotblitzstats.entities.PlayerLogEntity;
 import pl.lukabrasi.wotblitzstats.services.StatisticService;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Optional;
 
 @Controller
@@ -39,10 +41,9 @@ public class StatisticController {
     }
 
     @GetMapping("/{nickname}") //todo
-    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) {
-      String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
-        System.out.println(accountNb);
-            model.addAttribute("stats", statisticService.getStats(accountNb));
+    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) throws MalformedURLException {
+        String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
+        model.addAttribute("stats", statisticService.getStats(accountNb));
 
         return "index";
     }
