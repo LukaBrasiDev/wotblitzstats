@@ -1,5 +1,6 @@
 package pl.lukabrasi.wotblitzstats.controllers;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,14 +35,14 @@ public class StatisticController {
 
     @PostMapping("/")
     public String searchNick(@RequestParam("nickname") String nickname,
-                             Model model) {
+                             Model model) throws UnirestException {
         model.addAttribute("nick", statisticService.getAccountId(nickname));
 
         return "index";
     }
 
     @GetMapping("/{nickname}") //todo
-    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) throws MalformedURLException {
+    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) throws UnirestException {
         String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
         model.addAttribute("stats", statisticService.getStats(accountNb));
 

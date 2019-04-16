@@ -2,6 +2,10 @@ package pl.lukabrasi.wotblitzstats.services;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -42,12 +46,20 @@ public class StatisticService {
     String applicationId;
 
 
-    public AccountDto getAccountId(String nickname) {
-        RestTemplate restTemplate = getRestTemplate();
+    public AccountDto getAccountId(String nickname) throws UnirestException {
+       // RestTemplate restTemplate = getRestTemplate();
         String url = "https://api.wotblitz.eu/wotb/account/list/?application_id=" + applicationId + "&search=" + nickname;
-        AccountDto accountDto = restTemplate.getForObject(url, AccountDto.class);
+      //  AccountDto accountDto = restTemplate.getForObject(url, AccountDto.class);
+        HttpResponse<JsonNode> jsonResponse = Unirest.get(url)
+                //.routeParam("method", "get")
+                //.queryString("name", "Mark")
+                .asJson();
+        String json = jsonResponse.getBody().toString();
+        Gson gson = new Gson();
+        AccountDto myObj  = gson.fromJson(json,
+                new TypeToken<AccountDto>(){}.getType());
 
-        return accountDto;
+        return myObj;
     }
 
     public DemoJson getStats(String accountId){
