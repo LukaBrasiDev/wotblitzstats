@@ -12,3 +12,5 @@ TODO:
 
 JSON/GSON
 https://stackoverflow.com/questions/41680906/java-how-to-handle-dynamic-json-category-name
+
+JSON parsing: http://findnerd.com/list/view/Parse-Json-Object-with-dynamic-keys-using-Gson-/24094/
