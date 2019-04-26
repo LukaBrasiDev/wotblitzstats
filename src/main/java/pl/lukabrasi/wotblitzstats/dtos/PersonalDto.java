@@ -8,10 +8,16 @@ import lombok.Data;
 @Data
 public class PersonalDto {
 
-
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("meta")
+    @Expose
+    private MetaDto metaDto;
     @SerializedName("data")
     @Expose
     private DataDto dataDto;
+
 
 
 }

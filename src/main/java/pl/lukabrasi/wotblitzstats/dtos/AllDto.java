@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 @Data
 public class AllDto {
 
-   // private int wins;
+
+
    @SerializedName("battles")
    @Expose
     private int battles;

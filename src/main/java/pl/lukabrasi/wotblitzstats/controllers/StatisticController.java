@@ -7,13 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.lukabrasi.wotblitzstats.dtos.PersonalDto;
-import pl.lukabrasi.wotblitzstats.entities.PlayerLogEntity;
 import pl.lukabrasi.wotblitzstats.services.StatisticService;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Optional;
 
 @Controller
 public class StatisticController {
@@ -40,7 +34,7 @@ public class StatisticController {
         return "index";
     }
 
-    @GetMapping("/{nickname}") //todo
+    @GetMapping("/{nickname}")
     public String getStats(@PathVariable(value = "nickname") String nickname, Model model)  {
         String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
         model.addAttribute("stats", statisticService.getStats(accountNb));
