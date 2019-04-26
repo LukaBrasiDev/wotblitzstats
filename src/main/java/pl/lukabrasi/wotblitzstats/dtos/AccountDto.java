@@ -1,6 +1,8 @@
 package pl.lukabrasi.wotblitzstats.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.List;
@@ -8,8 +10,14 @@ import java.util.List;
 @Data
 public class AccountDto {
 
-    @JsonProperty("data")
+    @SerializedName("data")
+    @Expose
     private List<PlayerDataDto> playerDataDtoList;
-    @JsonProperty("meta")
+    @SerializedName("stats")
+    @Expose
+    private String status;
+    @SerializedName("meta")
+    @Expose
     private MetaDto metaDto;
+
 }
