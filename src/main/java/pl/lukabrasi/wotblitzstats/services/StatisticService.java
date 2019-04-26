@@ -1,30 +1,23 @@
 package pl.lukabrasi.wotblitzstats.services;
 
-import com.google.gson.*;
-import net.minidev.json.JSONObject;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.lukabrasi.wotblitzstats.dtos.AccountDto;
-import pl.lukabrasi.wotblitzstats.dtos.DataDto;
 import pl.lukabrasi.wotblitzstats.dtos.PersonalDto;
 import pl.lukabrasi.wotblitzstats.entities.PlayerLogEntity;
-import pl.lukabrasi.wotblitzstats.forms.PlayerLogForm;
-import pl.lukabrasi.wotblitzstats.mappers.DtoToEntityMapper;
 import pl.lukabrasi.wotblitzstats.repositories.PlayerLogRepository;
 
-import javax.ws.rs.client.ClientBuilder;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.time.LocalDateTime;
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 
 @Service
@@ -39,17 +32,12 @@ public class StatisticService {
     }
 
 
-    public boolean savePlayerLogEntity(PersonalDto personalDto) {
-        PlayerLogEntity playerLogEntity = DtoToEntityMapper.convert(personalDto);
-        // playerLogEntity.setUser(userSession.getUserEntity());
-        return playerLogRepository.save(playerLogEntity) != null;
 
-    }
 
 
 
     @Value("${api.wotblitzapplicationid.key}")
-    String applicationId;
+    public String applicationId;
 
 
     public AccountDto getAccountId(String nickname) {
@@ -61,15 +49,23 @@ public class StatisticService {
     }
 
     public PersonalDto getStats(String accountId){
-       RestTemplate restTemplate = getRestTemplate();
-       PersonalDto personalDto = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?application_id=" + applicationId + "&account_id=" + accountId, PersonalDto.class);
-       String url = "https://api.wotblitz.eu/wotb/account/info/?application_id=" + applicationId + "&account_id=" + accountId;
+        RestTemplate restTemplate = getRestTemplate();
+        String JSON = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?account_id=502174053&application_id=93fa062a128b405d638d4649f2cca564&fields=statistics.all.battles", String.class);
+                                                   //   https://api.wotblitz.eu/wotb/account/info/?account_id=502174053&application_id=93fa062a128b405d638d4649f2cca564&fields=statistics.all.wins%2Cstatistics.all.battles%2Clast_battle_time
 
+        Gson gson = new Gson();
+        PersonalDto myObj  = gson.fromJson(JSON,
+                new TypeToken<PersonalDto>(){}.getType());
+        System.out.println(myObj);
+        return myObj;
 
-
-
-        return personalDto;
     }
+
+/*    public PersonalDto getStats(String accountId){
+       RestTemplate restTemplate = getRestTemplate();
+       PersonalDto personalDto = restTemplate.getForObject("https://api.wotblitz.eu/wotb/account/info/?application_id=" + applicationId + "&account_id=" + accountId+"&fields=statistics.all.wins%2Cstatistics.all.battles%2Clast_battle_time", PersonalDto.class);
+            return personalDto;
+    }*/
 
 /*    public void updatePlayerLogEntity(int account, PlayerLogForm playerLogForm) {
         Optional<PlayerLogEntity> optionalPlayerLogEntity = playerLogRepository.findByAccountExists(account);

@@ -61,22 +61,21 @@
     <table th:if="${stats!=null}" class="table table-hover table-striped table-dark">
         <tr>
 
-            <td colspan=2 style="text-align: center"
-                th:utext="'<b>'+${stats.getDataDto().getAlcotronicDto().getNickname()}+'</b>'"></td>
+            <td colspan=2 style="text-align: center"> nick </td>
         </tr>
         <tr>
             <td style="text-align: right">Winrate:</td>
             <td style="text-align: left"
-                th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+                th:text="' %'"></td>
         </tr>
         <tr>
             <td style="text-align: right">Bitwy:</td>
             <td style="text-align: left"
-                th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
+                th:text="${stats}"></td>
         </tr>
         <tr>
             <td style="text-align: right">Ostatnia bitwa:</td>
-            <td style="text-align: left" th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+            <td style="text-align: left" th:text="'czas ostatniej bitwy'"></td>
         </tr>
         <tr>
             <td style="text-align: right"></td>
@@ -97,15 +96,15 @@
         </tr>
         <tr>
             <td style="text-align: right">Temp winrate:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getWinrate()}+' %'"></td>
+            <td th:text="' %'"></td>
         </tr>
         <tr>
             <td style="text-align: right">Temp bitwy:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getStatisticDto().getAllDto().getBattles()}"></td>
+            <td th:text="''"></td>
         </tr>
         <tr>
             <td style="text-align: right">Ostatnia bitwa:</td>
-            <td th:text="${stats.getDataDto().getAlcotronicDto().getLastBattleDate()}"></td>
+            <td th:text="''"></td>
         </tr>
 
     </table>

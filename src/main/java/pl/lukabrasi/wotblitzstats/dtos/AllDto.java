@@ -1,15 +1,21 @@
 package pl.lukabrasi.wotblitzstats.dtos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+
+import java.sql.Timestamp;
 
 @Data
 public class AllDto {
 
-    private double wins;
-    private double losses;
+   // private int wins;
+   @SerializedName("battles")
+   @Expose
     private int battles;
-    private double winrate;
 
+
+/*
     public double getWinrate() {
 
         double result = (wins  / battles)*100;
@@ -18,6 +24,7 @@ public class AllDto {
         result /=1000;
         return result;
     }
+*/
 
 
 }

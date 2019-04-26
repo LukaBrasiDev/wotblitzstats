@@ -41,7 +41,7 @@ public class StatisticController {
     }
 
     @GetMapping("/{nickname}") //todo
-    public String getStats(@PathVariable(value = "nickname") String nickname, Model model) throws MalformedURLException {
+    public String getStats(@PathVariable(value = "nickname") String nickname, Model model)  {
         String accountNb = statisticService.getAccountId(nickname).getPlayerDataDtoList().get(0).getAccountId();
         model.addAttribute("stats", statisticService.getStats(accountNb));
 

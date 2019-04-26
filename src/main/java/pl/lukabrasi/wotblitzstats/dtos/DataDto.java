@@ -1,10 +1,14 @@
 package pl.lukabrasi.wotblitzstats.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
 public class DataDto {
-    @JsonProperty("502174053")
-    private AlcotronicDto alcotronicDto;
+    @SerializedName("statistics")
+    @Expose
+    private StatisticDto statisticDto;
+
 }
